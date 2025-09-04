@@ -3,11 +3,12 @@ const prompt = require("prompt");
 const schema = {
     properties: {
         modo: {
-            message: "Qual Operação deseja realizar?",
-            type: "number",
+            message: "Qual Operação deseja realizar?:",
+            type: "number"
         },
     },
 };
+
 const ope = [
     "Escolha um Número:",
     "1 - Criar Registros",
@@ -24,7 +25,9 @@ const {
 } = require("./helper-pedidos");
 
 const criaRegistros = async () => {
-    const sql = `INSERT INTO pedidos (produto_id, quantidade, data_armazenada) VALUES (5, 4, '2025-09-03'), (6, 1, '2025-09-03')`;
+    const sql = `
+    INSERT INTO pedidos (produto_id, quantidade, data_armazenada) 
+    VALUES (5, 10, '2025-09-03'), (6, 15, '2025-09-03')`;
     try {
         const registro = await createRecords(sql);
         console.log(registro);
@@ -34,8 +37,11 @@ const criaRegistros = async () => {
 };
 
 const listaRegistros = async () => {
-    const sql = `SELECT pedidos.pedido_id, pedidos.quantidade, pedidos.data_armazenada, produtos.nome FROM pedidos
-INNER JOIN produtos ON produtos.produto_id = pedidos.produto_id; `;
+    const sql = `
+    SELECT pedidos.pedido_id, pedidos.quantidade, pedidos.data_armazenada, produtos.nome 
+    FROM pedidos
+    INNER JOIN produtos ON produtos.produto_id = pedidos.produto_id;`;
+
     try {
         const listaRegistro = await allPedidos(sql);
         console.log(listaRegistro);
@@ -45,8 +51,12 @@ INNER JOIN produtos ON produtos.produto_id = pedidos.produto_id; `;
 };
 
 const alteraQtdRegistro = async () => {
-    const sql = `UPDATE pedidos SET quantidade = ? WHERE pedido_id = ?;`;
-    const params = [5, 2];
+    const sql = `
+    UPDATE pedidos 
+    SET quantidade = ? 
+    WHERE pedido_id = ?;`;
+
+    const params = [5, 5];
     try {
         const update = await updatePedidos(sql, params);
         console.log(update);
@@ -56,11 +66,13 @@ const alteraQtdRegistro = async () => {
 };
 
 const deletaRegistro = async () => {
-    const sql = `DELETE FROM pedidos WHERE pedido_id = ?`;
-    const params = [1];
+    const sql = `
+    DELETE FROM pedidos 
+    WHERE pedido_id = ?`;
+
+    const params = [6];
     try {
         const deleta = await deletePedidos(sql, params);
-        console.log("Registro deletado com sucesso!");
         console.log(deleta);
     } catch (error) {
         console.log(error);
@@ -105,10 +117,10 @@ exibeMenuOperacoes();
 // um campo numérico referenciando o identificador do produto, um campo para a
 // quantidade e uma data armazenada em formato de texto ISO, como por exemplo
 // “2025-08-25”. Construa então um helper específico para pedidos, contendo funções
-// que permitam criar registros, listar todos os pedidos existentes
-
+// que permitam criar registros, listar todos os pedidos existente
 // (realizando um JOIN com a tabela de produtos para exibir também o nome do produto associado),
 // atualizar a quantidade de um pedido já cadastrado e excluir pedidos pelo identificador.
+
 // Em seguida, crie um fluxo assíncrono que simule operações reais: insira dois pedidos,
 // liste-os, altere a quantidade do primeiro pedido, liste novamente, exclua o segundo e
 // finalize com uma nova listagem para confirmar a exclusão.

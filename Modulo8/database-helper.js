@@ -1,4 +1,4 @@
-const db = require("./database.js");
+const db = require("./database");
 
 const runQuery = (sql, params = []) => {
     return new Promise((resolve, reject) => {

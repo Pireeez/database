@@ -1,10 +1,5 @@
 const db = require('./database');
-const { allQuery, runQuery, getQuery }= require('./database-helper')
-
-const produto = 'Uva'
-const preco = 10.00
-
-//const sql = `INSERT INTO produtos (nome,preco) VALUES ('${produto}',${preco});`;
+const { allQuery, runQuery, getQuery }= require('./database-helper');
 
 const adicionaProduto = async() => {
     const sql = `
@@ -28,7 +23,6 @@ const buscaProduto = async() => {
     }
 }
 
-
 const listaProdutos = async() => {
     const sql = `SELECT produtos.nome, produtos.preco FROM produtos;`;
     try {
@@ -46,20 +40,4 @@ const listaProdutos = async() => {
 //adicionaProduto();
 // buscaProduto();
 listaProdutos();
-
-// db.run(sql,params, (err) => {
-//     if(err){
-//         return console.error(err.message);
-//     }else{
-//         return console.log(`Um produto foi adicionado ID: ${this.lastID}`);
-//     }
-// })
-
-// db.all(sql2,params, (err,rows) => {
-//     if(err){
-//         return err;
-//     }else{
-//         rows.forEach(rows => {console.log(rows.nome);})
-//     }
-// })
 

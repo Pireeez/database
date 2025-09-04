@@ -22,3 +22,7 @@
 -- UPDATE pedidos
 -- SET quantidade = 3
 -- WHERE pedido_id = 2;
+
+DELETE FROM pedidos;
+
+SELECT * FROM pedidos;
